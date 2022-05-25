@@ -14,7 +14,11 @@ app.get('/one', (req, res) => {
 /** Your code below */
 app.post('/one/:id', (req, res) => {
   console.log('route post ok');
-  res.status(201).json(users.filter(user => user.id === parseInt(req.params.id))[0])
+  if (req.body.gender) {
+    res.status(201).json(users.filter(user => user.id === parseInt(req.params.id))[0]);
+  } else {
+    res.status(404).send('Should contain a gender');
+  }
 })
 
 app.listen(port, () => console.log('Server is running correctly or not'))
