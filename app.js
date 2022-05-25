@@ -15,7 +15,12 @@ app.get('/one', (req, res) => {
 app.post('/one/:id', (req, res) => {
   console.log('route post ok');
   if (req.body.gender) {
-    res.status(201).json(users.filter(user => user.id === parseInt(req.params.id))[0]);
+    const user = users.filter(user => user.id === parseInt(req.params.id))[0]
+    if (req.body.gender.toUpperCase() === user.gender.toUpperCase()) {
+      res.status(201).json(user);
+    } else {
+      res.status(400).send('Incorrect gender, try again !!!')
+    }
   } else {
     res.status(404).send('Should contain a gender');
   }
