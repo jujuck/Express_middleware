@@ -2,17 +2,9 @@ const express = require('express');
 const port = 5000;
 const app = express();
 const users = require('./data/users.js');
+const checkGender = require('./middleware/user.js');
 
 app.use(express.json());
-
-const checkGender = (req, res, next) => {
-  const { gender } = req.body;
-  if (gender) {
-    next();
-  } else {
-    res.status(404).send('Your request should contain a gender');
-  }
-}
 
 app.get('/one', (req, res) => {
   console.log('Get is working');
