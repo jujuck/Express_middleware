@@ -5,6 +5,15 @@ const users = require('./data/users.js');
 
 app.use(express.json());
 
+const checkGender = (req, res, next) => {
+  const { gender } = req.body;
+  if (gender) {
+    next();
+  } else {
+    res.status(404).send('Your request should contain a gender');
+  }
+}
+
 app.get('/one', (req, res) => {
   console.log('Get is working');
   const random = Math.floor(Math.random() * 1000) + 1;
@@ -12,17 +21,12 @@ app.get('/one', (req, res) => {
 });
 
 /** Your code below */
-app.post('/one/:id', (req, res) => {
-  console.log('route post ok');
-  if (req.body.gender) {
-    const user = users.filter(user => user.id === parseInt(req.params.id))[0]
-    if (req.body.gender.toUpperCase() === user.gender.toUpperCase()) {
-      res.status(201).json(user);
-    } else {
-      res.status(400).send('Incorrect gender, try again !!!')
-    }
+app.post('/one/:id', checkGender, (req, res) => {
+  const myUser = users.filter(user => user.id === parseInt(req.params.id))[0];
+  if (req.body.gender.toUpperCase() === myUser.gender.toUpperCase()) {
+    res.status(202).send(myUser);
   } else {
-    res.status(404).send('Should contain a gender');
+    res.status(404).send('Gender is incorrect, try again')
   }
 })
 
