@@ -12,5 +12,9 @@ app.get('/one', (req, res) => {
 });
 
 /** Your code below */
+app.post('/one/:id', (req, res) => {
+  console.log('route post ok');
+  res.status(201).json(users.filter(user => user.id === parseInt(req.params.id))[0])
+})
 
 app.listen(port, () => console.log('Server is running correctly or not'))
