@@ -5,6 +5,8 @@ The workshop is decline step by step. If you're lost, you will find the solution
 ## Presentation
 At this step, we have a single route that retrieve a random user and send its firstname lastname and id. The goal is, from this information, to post (/one/:id) with the correct gender (male, female, polygender, agender, non-binary) in the body (with the other information firstname, lastname). If it's match, then you will get all the information on this user.
 
+Follow this video with quick introduction to Middleware https://drive.google.com/file/d/1YEQy-oYSzoNM2nkWQD4uCN1vCjh8J5yM/view?usp=sharing
+
 ## Step by step
 - 1/ Create a post route ('/one/:id') and send all the information of the user
 - 2/ Before sending the response, add a check if the body contains a key gender. If yes, return the full information, else return a 404 with a message, should contains a gender
