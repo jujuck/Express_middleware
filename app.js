@@ -13,4 +13,4 @@ app.get('/one', (req, res) => {
 
 /** Your code below */
 
-app.listen(port, () => console.log('Server is running correctly or not'))
+app.listen(port, () => console.log('Server is running correctly or not on http://localhost:5000'))
